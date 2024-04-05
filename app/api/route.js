@@ -6,12 +6,12 @@ import { Readable } from 'stream';
 export async function POST(request, context) {
 
     const oauth2Client = new google.auth.OAuth2(
-        '432599773188-q9ds38fcusg4160bg6n4d7b2e1so1img.apps.googleusercontent.com', // Client ID
-        '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', // Client Secret
+        process.env.CLIENT_ID, // Client ID
+        process.env.CLIENT_SECRET, // Client Secret
         'http://localhost:80' // Redirect URL
     );
     oauth2Client.setCredentials({
-        refresh_token: '1//0eEgQwWhTZ_YOCgYIARAAGA4SNwF-L9Irm2KUOmKrpBr6X1O18FJcZeNPjyq27g75CpRcbzH_UWNdiyeyOsdB5oErmTV02lOQ4yA'
+        refresh_token: process.env.REFRESH_TOKEN
     });
     const drive = google.drive({
         version: 'v3',
