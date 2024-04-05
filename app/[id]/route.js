@@ -7,7 +7,7 @@ export async function GET(request, context) {
 
       const id = String(context.params.id).replace('.jpeg', '');
       const headers = {
-        "Content-Type": "image/jpeg",
+        "Content-Type": "text",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, OPTION",
