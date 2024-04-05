@@ -24,7 +24,7 @@ export async function GET(request, context) {
 
       try {
         blob = await store.get(id); 
-        return NextResponse.json(blob, { status: 400 });
+        return NextResponse(blob, { status: 200, headers });
       } catch (error) {
         console.log(error)
       }
