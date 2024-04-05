@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server'
 import { Readable } from 'stream';
+import { getStore } from "@netlify/blobs";
 
 export async function POST(request, context) {
 
@@ -40,8 +41,19 @@ export async function POST(request, context) {
                   body: imageStream,
                 },
             });
-        
-            return NextResponse.json(response.data  , { status: 200 });
+
+            if(response?.status == 200){
+                if(response?.data){
+                    const keys = getStore({
+                        name: 'keys-store',
+                        siteID: '30cc35f8-b6da-4d54-ade8-0d6e322e0b48',
+                        token: 'nfp_nEoRVLqwwBCnV1aVTn9MCQV9juJKyiJD5f31',
+                    });
+                    await keys.set(response?.data?.id, 'true')
+                }
+            }
+
+            return NextResponse.json(response.data, { status: 200 });
         }else{
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
