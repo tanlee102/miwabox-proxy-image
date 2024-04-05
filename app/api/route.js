@@ -39,9 +39,9 @@ export async function POST(request, context) {
         //     },
         // });
     
-        return NextResponse.json("helo"  , { status: 200 })   
+        return NextResponse("helo"  , { status: 200 })   
     } catch (error) {
-        return NextResponse.json(error  , { status: 400 })   
+        return NextResponse(error  , { status: 400 })   
     }
 
 }
