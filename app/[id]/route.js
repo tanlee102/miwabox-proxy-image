@@ -1,27 +1,50 @@
-import fetch from 'node-fetch';
 import { NextResponse } from 'next/server'
+import { getStore, getDeployStore } from "@netlify/blobs";
 
-async function getImageStream(id) {
+export async function GET(request, context) {
 
-    const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
-    // const url = 'https://www.googleapis.com/drive/v3/files/'+req.nextUrl.searchParams.get("id")+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'
+  try {
 
-    const response = await fetch(url, { cache: 'force-cache' });
-    const headers = {
+      const id = String(context.params.id).replace('.jpeg', '');
+      const headers = {
         "Content-Type": "image/jpeg",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, OPTION",
     }
-    
-    return new NextResponse(response.body, { status: 200, headers })
-}
+      
+      const store = getStore({
+        name: 'image-store',
+        siteID: '30cc35f8-b6da-4d54-ade8-0d6e322e0b48',
+        token: 'nfp_nEoRVLqwwBCnV1aVTn9MCQV9juJKyiJD5f31',
+      });
 
-export async function GET(request) {
-    let url = String(request.url).split('/')[3];
-    try {
-      return await getImageStream(url.replace('.jpeg', ''));
+
+      var blob = null
+
+      try {
+        blob = await store.get(id); 
+      } catch (error) {
+        console.log(error)
+      }
+
+
+      if(blob){
+        return new NextResponse(blob.stream(), { status: 200, headers })
+      }else{
+        const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
+        // const url = 'https://www.googleapis.com/drive/v3/files/'+req.nextUrl.searchParams.get("id")+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'
+  
+        const response = await fetch(url, { cache: 'force-cache' });
+        blob = await response.blob();
+
+        await store.set(id, blob, {type: 'blob'})
+
+        return new NextResponse(blob.stream(), { status: 200, headers })
+      }
+
     } catch (error) {
+      console.log(error)
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 }
