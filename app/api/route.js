@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server'
-// import { Readable } from 'stream';
+import { Readable } from 'stream';
 
 
 export async function POST(request, context) {
@@ -23,11 +23,11 @@ export async function POST(request, context) {
         const formData = await request.formData();
         const image = formData.get("image") instanceof File ? formData.get("image") : null;
     
-        // const imageBuffer = await new Response(image).arrayBuffer();
+        const imageBuffer = await new Response(image).arrayBuffer();
     
-        // const imageStream = new Readable();
-        // imageStream.push(Buffer.from(imageBuffer));
-        // imageStream.push(null);
+        const imageStream = new Readable();
+        imageStream.push(Buffer.from(imageBuffer));
+        imageStream.push(null);
     
         // const response = await drive.files.create({
         //     requestBody: {
