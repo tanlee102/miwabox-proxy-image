@@ -6,9 +6,9 @@ import { Readable } from 'stream';
 export async function POST(request, context) {
 
     const oauth2Client = new google.auth.OAuth2(
-        process.env.CLIENT_ID, // Client ID
-        process.env.CLIENT_SECRET, // Client Secret
-        'http://localhost:80' // Redirect URL
+        process.env.CLIENT_ID, 
+        process.env.CLIENT_SECRET, 
+        'http://localhost:80'
     );
     oauth2Client.setCredentials({
         refresh_token: process.env.REFRESH_TOKEN
