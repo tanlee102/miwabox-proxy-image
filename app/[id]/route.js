@@ -6,14 +6,7 @@ export async function GET(request, context) {
   try {
 
       const password = String(request.nextUrl.searchParams.get("password"));
-
       const id = String(context.params.id).replace('.jpeg', '');
-      const headers = {
-        "Content-Type": "image/jpeg",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "GET, POST, OPTION",
-      }
       
 
       const store = getStore({
@@ -41,14 +34,21 @@ export async function GET(request, context) {
 
 
       if(approve){
-        var blob = null
+        
+        const headers = {
+          "Content-Type": "image/jpeg",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, OPTION",
+        }
+
+        var blob = null;
         blob = await store.get(id, { type: 'blob' }); 
   
         if(blob){
-          return new NextResponse(blob.stream(), { status: 200, headers })
+          return new NextResponse(blob.stream(), { status: 200, headers });
         }else{
           const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
-          // const url = 'https://www.googleapis.com/drive/v3/files/'+id+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'
     
           const response = await fetch(url, { cache: 'force-cache' });
           if(response.status == 200){
@@ -59,6 +59,7 @@ export async function GET(request, context) {
             return NextResponse.json({ error: 'Not Found' }, { status: 404 });
           }
         }
+        
       }else{
         return NextResponse.json({ error: 'Not Authencation' }, { status: 400 });
       }
@@ -67,3 +68,6 @@ export async function GET(request, context) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 }
+
+
+// const url = 'https://www.googleapis.com/drive/v3/files/'+id+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'
