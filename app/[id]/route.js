@@ -7,7 +7,7 @@ export async function GET(request, context) {
 
       const id = String(context.params.id).replace('.jpeg', '');
       const headers = {
-        "Content-Type": "text",
+        "Content-Type": "image/*",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, OPTION",
@@ -21,10 +21,10 @@ export async function GET(request, context) {
 
 
       var blob = null
-      blob = await store.get(id); 
+      blob = await store.get(id, { type: 'blob' }); 
 
       if(blob){
-        return new NextResponse(typeof blob, { status: 200, headers })
+        return new NextResponse(blob, { status: 200, headers })
       }else{
         const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
         // const url = 'https://www.googleapis.com/drive/v3/files/'+req.nextUrl.searchParams.get("id")+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'
