@@ -63,9 +63,8 @@ export async function GET(request, context) {
             return NextResponse.json({ error: 'Not Found' }, { status: 404 });
           }
         }
-        
       }else{
-        return NextResponse.json({ error: 'Not Authencation' }, { status: 400 });
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
 
     } catch (error) {

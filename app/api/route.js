@@ -20,26 +20,34 @@ export async function POST(request, context) {
         
         const formData = await request.formData();
         const image = formData.get("image") instanceof File ? formData.get("image") : null;
+        const password = formData.get("password");
+
+
+
+        if(String(process.env.PASSWORD) === String(password)){
+            const imageBuffer = await new Response(image).arrayBuffer();
     
-        const imageBuffer = await new Response(image).arrayBuffer();
-    
-        const imageStream = new Readable();
-        imageStream.push(Buffer.from(imageBuffer));
-        imageStream.push(null);
-    
-        const response = await drive.files.create({
-            requestBody: {
-              name: image.name,
-            },
-            media: {
-              mimeType: image.type,
-              body: imageStream,
-            },
-        });
-    
-        return NextResponse.json(response.data  , { status: 200 })   
+            const imageStream = new Readable();
+            imageStream.push(Buffer.from(imageBuffer));
+            imageStream.push(null);
+        
+            const response = await drive.files.create({
+                requestBody: {
+                  name: image.name,
+                },
+                media: {
+                  mimeType: image.type,
+                  body: imageStream,
+                },
+            });
+        
+            return NextResponse.json(response.data  , { status: 200 });
+        }else{
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
     } catch (error) {
-        return new NextResponse(error  , { status: 400 })   
+        return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
 }
