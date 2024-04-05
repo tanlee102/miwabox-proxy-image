@@ -41,7 +41,7 @@ export async function GET(request, context) {
 
         await store.set(id, blob, {type: 'blob'})
 
-        return new NextResponse(blob.stream(), { status: 200, headers })
+        return new NextResponse(blob, { status: 200, headers })
       }
 
     } catch (error) {
