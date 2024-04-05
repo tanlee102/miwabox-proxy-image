@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server'
-// import { Readable } from 'stream';
+import { Readable } from 'stream';
 
 
 export async function POST(request, context) {
@@ -20,24 +20,24 @@ export async function POST(request, context) {
             auth: oauth2Client
         });
         
-        // const formData = await request.formData();
-        // const image = formData.get("image") instanceof File ? formData.get("image") : null;
+        const formData = await request.formData();
+        const image = formData.get("image") instanceof File ? formData.get("image") : null;
     
-        // const imageBuffer = await new Response(image).arrayBuffer();
+        const imageBuffer = await new Response(image).arrayBuffer();
     
-        // const imageStream = new Readable();
-        // imageStream.push(Buffer.from(imageBuffer));
-        // imageStream.push(null);
+        const imageStream = new Readable();
+        imageStream.push(Buffer.from(imageBuffer));
+        imageStream.push(null);
     
-        // const response = await drive.files.create({
-        //     requestBody: {
-        //       name: 'mytan.jpeg', // This can be any name, and doesn't have to match the actual file
-        //     },
-        //     media: {
-        //       mimeType: 'image/jpeg',
-        //       body: imageStream, // Use the actual path to your file
-        //     },
-        // });
+        const response = await drive.files.create({
+            requestBody: {
+              name: 'mytan.jpeg', // This can be any name, and doesn't have to match the actual file
+            },
+            media: {
+              mimeType: 'image/jpeg',
+              body: imageStream, // Use the actual path to your file
+            },
+        });
     
         return NextResponse("helo"  , { status: 200 })   
     } catch (error) {
