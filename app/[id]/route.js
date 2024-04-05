@@ -21,16 +21,10 @@ export async function GET(request, context) {
 
 
       var blob = null
-
-      try {
-        blob = await store.get(id); 
-      } catch (error) {
-        console.log(error)
-      }
-
+      blob = await store.get(id); 
 
       if(blob){
-        return NextResponse(blob, { status: 200, headers });
+        return NextResponse(new Blob(blob), { status: 200, headers });
       }else{
         const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
         // const url = 'https://www.googleapis.com/drive/v3/files/'+req.nextUrl.searchParams.get("id")+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'
