@@ -2,7 +2,6 @@ import { google } from 'googleapis';
 import { NextResponse } from 'next/server'
 import { Readable } from 'stream';
 
-
 export async function POST(request, context) {
 
     try {
@@ -30,15 +29,15 @@ export async function POST(request, context) {
     
         const response = await drive.files.create({
             requestBody: {
-              name: 'mytan.jpeg', // This can be any name, and doesn't have to match the actual file
+              name: image.name,
             },
             media: {
-              mimeType: 'image/jpeg',
-              body: imageStream, // Use the actual path to your file
+              mimeType: image.type,
+              body: imageStream,
             },
         });
     
-        return new NextResponse("success"  , { status: 200 })   
+        return NextResponse.json(response.data  , { status: 200 })   
     } catch (error) {
         return new NextResponse(error  , { status: 400 })   
     }

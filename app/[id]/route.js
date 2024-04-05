@@ -6,8 +6,12 @@ export async function GET(request, context) {
   try {
 
       const password = String(request.nextUrl.searchParams.get("password"));
-      const id = String(context.params.id).replace('.jpeg', '');
+
+      const fileName = String(context.params.id);
       
+      const fileParts = fileName.split(".");
+      const extension = fileParts.pop();
+      const id = fileParts.join(".");
 
       const store = getStore({
         name: 'images-store',
@@ -36,7 +40,7 @@ export async function GET(request, context) {
       if(approve){
         
         const headers = {
-          "Content-Type": "image/jpeg",
+          "Content-Type": "image/"+extension,
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
           "Access-Control-Allow-Methods": "GET, POST, OPTION",
