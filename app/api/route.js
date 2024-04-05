@@ -20,8 +20,8 @@ export async function POST(request, context) {
             auth: oauth2Client
         });
         
-        const formData = await request.formData();
-        const image = formData.get("image") instanceof File ? formData.get("image") : null;
+        // const formData = await request.formData();
+        // const image = formData.get("image") instanceof File ? formData.get("image") : null;
     
         // const imageBuffer = await new Response(image).arrayBuffer();
     
