@@ -38,7 +38,7 @@ export async function POST(request, context) {
             },
         });
     
-        return new NextResponse("helo"  , { status: 200 })   
+        return new NextResponse("success"  , { status: 200 })   
     } catch (error) {
         return new NextResponse(error  , { status: 400 })   
     }
