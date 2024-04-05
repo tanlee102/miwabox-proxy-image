@@ -5,7 +5,6 @@ import { Readable } from 'stream';
 
 export async function POST(request, context) {
 
-
     try {
         const oauth2Client = new google.auth.OAuth2(
             process.env.CLIENT_ID, 
@@ -39,9 +38,9 @@ export async function POST(request, context) {
             },
         });
     
-        return NextResponse("helo"  , { status: 200 })   
+        return new NextResponse("helo"  , { status: 200 })   
     } catch (error) {
-        return NextResponse(error  , { status: 400 })   
+        return new NextResponse(error  , { status: 400 })   
     }
 
 }
