@@ -41,7 +41,7 @@ export async function POST(request, context) {
     
         return NextResponse.json(image  , { status: 200 })   
     } catch (error) {
-        return NextResponse.json(error  , { status: 400 })   
+        return NextResponse.json({how:"shit"}  , { status: 400 })   
     }
 
 }
