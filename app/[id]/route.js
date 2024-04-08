@@ -47,7 +47,7 @@ export async function GET(request, context) {
         }
 
         var blob = null;
-        blob = await store.get(id, { type: 'blob' }); 
+        // blob = await store.get(id, { type: 'blob' }); 
   
         if(blob){
           return new NextResponse(blob.stream(), { status: 200, headers });
