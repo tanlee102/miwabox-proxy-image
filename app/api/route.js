@@ -24,6 +24,13 @@ export async function POST(request, context) {
         const password = formData.get("password");
 
 
+        const headers = {
+            "Content-Type": "image/"+extension,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTION",
+        }
+
 
         if(String(process.env.PASSWORD) === String(password)){
             const imageBuffer = await new Response(image).arrayBuffer();
@@ -53,13 +60,13 @@ export async function POST(request, context) {
                 }
             }
 
-            return NextResponse.json(response.data, { status: 200 });
+            return NextResponse.json(response.data, { status: 200, headers });
         }else{
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
         }
 
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 400 });
+        return NextResponse.json({ error: error.message }, { status: 400, headers });
     }
 
 }
