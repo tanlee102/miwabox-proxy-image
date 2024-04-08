@@ -47,13 +47,12 @@ export async function GET(request, context) {
         }
 
         var blob = null;
-        // blob = await store.get(id, { type: 'blob' }); 
+        blob = await store.get(id, { type: 'blob' }); 
   
         if(blob){
           return new NextResponse(blob.stream(), { status: 200, headers });
         }else{
-          // const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
-          const url = 'https://www.googleapis.com/drive/v3/files/'+id+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media';
+          const url = 'https://drive.google.com/uc?id=' + id + '&export=download';
     
           const response = await fetch(url, { cache: 'force-cache' });
           if(response.status == 200){
