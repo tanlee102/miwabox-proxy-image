@@ -51,12 +51,22 @@ export async function POST(request, context) {
 
             if(response?.status == 200){
                 if(response?.data){
+                    const fileId = response.data.id;
+
                     const keys = getStore({
                         name: 'keys-store',
                         siteID: '30cc35f8-b6da-4d54-ade8-0d6e322e0b48',
                         token: 'nfp_nEoRVLqwwBCnV1aVTn9MCQV9juJKyiJD5f31',
                     });
-                    await keys.set(response?.data?.id, 'true')
+                    await keys.set(fileId, 'true');
+
+                    await drive.permissions.create({
+                        fileId: fileId,
+                        requestBody: {
+                            role: 'reader',
+                            type: 'anyone'
+                        }
+                    });
                 }
             }
 
