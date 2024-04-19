@@ -25,7 +25,7 @@ export async function POST(request, context) {
 
 
         const headers = {
-            "Content-Type": "image/jpeg",
+            "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Methods": "GET, POST, OPTION",
