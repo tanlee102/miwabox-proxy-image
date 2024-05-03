@@ -59,6 +59,7 @@ export async function DELETE(request, context) {
 
 
     } catch (error) {
+        console.log(error)
         return NextResponse.json({ error: error }, { status: 400, headers });
     }
 
