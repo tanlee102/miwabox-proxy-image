@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 import { google } from 'googleapis';
 
-export async function GET(request, context) {
+export async function DELETE(request, context) {
 
     const headers = {
         "Content-Type": "application/json",
