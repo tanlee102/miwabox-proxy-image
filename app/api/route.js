@@ -55,8 +55,8 @@ export async function POST(request, context) {
 
                     const keys = getStore({
                         name: 'keys-store',
-                        siteID: '30cc35f8-b6da-4d54-ade8-0d6e322e0b48',
-                        token: 'nfp_nEoRVLqwwBCnV1aVTn9MCQV9juJKyiJD5f31',
+                        siteID: process.env.siteID,
+                        token: process.env.token,
                     });
                     await keys.set(fileId, 'true');
 
