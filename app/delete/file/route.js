@@ -2,13 +2,13 @@ import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 import { google } from 'googleapis';
 
-export async function POST(request, context) {
+export async function DELETE(request, context) {
 
     const headers = {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "GET, POST, OPTION, DELETE",
+        "Access-Control-Allow-Methods": "DELETE",
     }
 
     try {
