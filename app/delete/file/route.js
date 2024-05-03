@@ -14,13 +14,10 @@ export async function GET(request, context) {
     try {
 
         const password = String(request.nextUrl.searchParams.get("password"));
+        const id = String(request.nextUrl.searchParams.get("id"));
+        
         if(password !== process.env.PASSWORD) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
-
-        const fileName = String(context.params.id);
-        const fileParts = fileName.split(".");
-        const extension = fileParts.pop();
-        const id = fileParts.join(".");
-
+        
         const oauth2Client = new google.auth.OAuth2(
             process.env.CLIENT_ID, 
             process.env.CLIENT_SECRET, 
