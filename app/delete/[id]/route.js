@@ -3,13 +3,14 @@ import { getStore } from "@netlify/blobs";
 
 export async function DELETE(request, context) {
 
+    const headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, OPTION",
+    }
+
     try {
-        const headers = {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "GET, POST, OPTION",
-        }
 
         const password = String(request.nextUrl.searchParams.get("password"));
         if(password !== process.env.PASSWORD) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
