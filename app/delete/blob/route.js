@@ -14,9 +14,11 @@ export async function POST(request, context) {
         const password = String(request.nextUrl.searchParams.get("password"));
         if(password !== process.env.PASSWORD) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
 
+        const blob = String(request.nextUrl.searchParams.get("blob"));
+
         try {
             const store = getStore({
-                name: '',
+                name: blob,
                 siteID: process.env.siteID,
                 token: process.env.token,
             });
