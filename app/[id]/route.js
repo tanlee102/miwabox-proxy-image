@@ -9,7 +9,6 @@ export async function GET(request, context) {
   try {
 
       const password = String(request.nextUrl.searchParams.get("password"));
-
       const fileName = String(context.params.id);
       
       const fileParts = fileName.split(".");
@@ -28,12 +27,12 @@ export async function GET(request, context) {
       });
 
 
-      var approve = false
+      let approve = false
       if(password === String(process.env.PASSWORD)){
         approve = true
         await keys.set(id, 'true')
       }else{
-        let tmp = await keys.get(id)
+        const tmp = await keys.get(id)
         if(tmp){
           approve = true
         }
@@ -47,10 +46,10 @@ export async function GET(request, context) {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
           "Access-Control-Allow-Methods": "GET",
+          "Cache-Control": "public, max-age=3600"
         }
 
-        var blob = null;
-        blob = await store.get(id, { type: 'blob' }); 
+        let blob = await store.get(id, { type: 'blob' }); 
   
         if(blob){
           return new NextResponse(blob.stream(), { status: 200, headers });
@@ -63,11 +62,11 @@ export async function GET(request, context) {
             await store.set(id, blob, {type: 'blob'})
             return new NextResponse(blob.stream(), { status: 200, headers })
           }else{
-            return NextResponse.json({ error: 'Not Found' }, { status: 404 });
+            return NextResponse.json({ error: 'Not Found.' }, { status: 404 });
           }
         }
       }else{
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
       }
 
     } catch (error) {

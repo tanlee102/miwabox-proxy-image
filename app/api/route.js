@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { Readable } from 'stream';
 import { getStore } from "@netlify/blobs";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 export async function POST(request, context) {
 
@@ -74,7 +74,7 @@ export async function POST(request, context) {
 
             return NextResponse.json(response.data, { status: 200, headers });
         }else{
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
+            return NextResponse.json({ error: 'Unauthorized.' }, { status: 401, headers });
         }
 
     } catch (error) {
