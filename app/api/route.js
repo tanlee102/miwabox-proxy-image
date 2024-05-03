@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server'
 import { Readable } from 'stream';
 import { getStore } from "@netlify/blobs";
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(request, context) {
 
     try {

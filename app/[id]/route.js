@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 
+export const dynamic = 'force-dynamic'
+
 //This is router image
 export async function GET(request, context) {
 
