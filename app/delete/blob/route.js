@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 
-export async function POST(request, context) {
+export async function DELETE(request, context) {
 
     try {
         const headers = {
