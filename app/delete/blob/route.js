@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 
-export async function POST(request, context) {
+export async function DELETE(request, context) {
 
     try {
         const headers = {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "GET, POST, OPTION",
+            "Access-Control-Allow-Methods": "DELETE",
         }
 
         const password = String(request.nextUrl.searchParams.get("password"));
