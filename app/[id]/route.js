@@ -44,7 +44,7 @@ export async function GET(request, context) {
           "Content-Type": "image/"+extension,
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "GET, POST, OPTION",
+          "Access-Control-Allow-Methods": "GET",
         }
 
         var blob = null;

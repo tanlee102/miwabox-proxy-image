@@ -8,7 +8,7 @@ export async function GET(request, context) {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "DELETE",
+            "Access-Control-Allow-Methods": "GET",
         }
 
         const password = String(request.nextUrl.searchParams.get("password"));
