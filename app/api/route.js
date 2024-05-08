@@ -7,6 +7,13 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request, context) {
 
+    const headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST",
+    }
+
     try {
         const oauth2Client = new google.auth.OAuth2(
             process.env.CLIENT_ID, 
@@ -24,15 +31,6 @@ export async function POST(request, context) {
         const formData = await request.formData();
         const image = formData.get("image") instanceof File ? formData.get("image") : null;
         const password = formData.get("password");
-
-
-        const headers = {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "POST",
-        }
-
 
         if(String(process.env.PASSWORD) === String(password)){
             const imageBuffer = await new Response(image).arrayBuffer();
