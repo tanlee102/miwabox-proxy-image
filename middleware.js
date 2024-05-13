@@ -12,17 +12,24 @@ export async function middleware(request) {
     const headersList = headers()
     const token = headersList.get('mytoken');
 
-    console.log(request.method, token)
-    // console.log(headersList)
-
-
-
-    const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
-    const data = await jose.jwtVerify(token, secret);
-
-    console.log(data)
-
-    console.log('-------')
+    if(request.method === 'OPTIONS'){
+        const headers = {
+            "Content-Type": "*/*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
+        }
+        return new NextResponse({ status: 200, headers });
+    }else{
+        console.log(request.method, token)
+        
+        const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
+        const data = await jose.jwtVerify(token, secret);
+    
+        console.log(data)
+    
+        console.log('-------')   
+    }
 
     // if(!token){
 
