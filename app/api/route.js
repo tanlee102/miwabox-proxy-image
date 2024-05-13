@@ -20,6 +20,7 @@ export async function PUT(request, context) {
 
     const headersList = headers();
     console.log(headersList)
+    const token = headersList.get("mytoken");
 
     const my_headers = {
         "Content-Type": "application/json",
@@ -29,60 +30,60 @@ export async function PUT(request, context) {
     }    
 
     try {
-        const oauth2Client = new google.auth.OAuth2(
-            process.env.CLIENT_ID, 
-            process.env.CLIENT_SECRET, 
-            'http://localhost:80'
-        );
-        oauth2Client.setCredentials({
-            refresh_token: process.env.REFRESH_TOKEN
-        });
-        const drive = google.drive({
-            version: 'v3',
-            auth: oauth2Client
-        });
+        // const oauth2Client = new google.auth.OAuth2(
+        //     process.env.CLIENT_ID, 
+        //     process.env.CLIENT_SECRET, 
+        //     'http://localhost:80'
+        // );
+        // oauth2Client.setCredentials({
+        //     refresh_token: process.env.REFRESH_TOKEN
+        // });
+        // const drive = google.drive({
+        //     version: 'v3',
+        //     auth: oauth2Client
+        // });
         
-        const formData = await request.formData();
-        const image = formData.get("image") instanceof File ? formData.get("image") : null;
+        // const formData = await request.formData();
+        // const image = formData.get("image") instanceof File ? formData.get("image") : null;
 
-        const imageBuffer = await new Response(image).arrayBuffer();
+        // const imageBuffer = await new Response(image).arrayBuffer();
 
-        const imageStream = new Readable();
-        imageStream.push(Buffer.from(imageBuffer));
-        imageStream.push(null);
+        // const imageStream = new Readable();
+        // imageStream.push(Buffer.from(imageBuffer));
+        // imageStream.push(null);
     
-        const response = await drive.files.create({
-            requestBody: {
-                name: image.name,
-            },
-            media: {
-                mimeType: image.type,
-                body: imageStream,
-            },
-        });
+        // const response = await drive.files.create({
+        //     requestBody: {
+        //         name: image.name,
+        //     },
+        //     media: {
+        //         mimeType: image.type,
+        //         body: imageStream,
+        //     },
+        // });
 
-        if(response?.status == 200){
-            if(response?.data){
-                const fileId = response.data.id;
+        // if(response?.status == 200){
+        //     if(response?.data){
+        //         const fileId = response.data.id;
 
-                const keys = getStore({
-                    name: 'keys-store',
-                    siteID: process.env.siteID,
-                    token: process.env.token,
-                });
-                await keys.set(fileId, 'true');
+        //         const keys = getStore({
+        //             name: 'keys-store',
+        //             siteID: process.env.siteID,
+        //             token: process.env.token,
+        //         });
+        //         await keys.set(fileId, 'true');
 
-                await drive.permissions.create({
-                    fileId: fileId,
-                    requestBody: {
-                        role: 'reader',
-                        type: 'anyone'
-                    }
-                });
-            }
-        }
+        //         await drive.permissions.create({
+        //             fileId: fileId,
+        //             requestBody: {
+        //                 role: 'reader',
+        //                 type: 'anyone'
+        //             }
+        //         });
+        //     }
+        // }
 
-        return NextResponse.json(response.data, { status: 200, my_headers });
+        return NextResponse.json(token, { status: 200, my_headers });
 
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 400, my_headers });
