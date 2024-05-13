@@ -13,6 +13,7 @@ export async function middleware(request) {
     const token = headersList.get('mytoken');
 
     console.log(request.method, token)
+    console.log(headersList)
     console.log('-------')
 
     if(token){
