@@ -10,7 +10,7 @@ const listEmailApproved = [
 export async function middleware(request) {
 
     const headersList = headers()
-    const myAuthorization = headersList.get('MyToken');
+    const myAuthorization = headersList.get('mytoken');
 
     console.log(headersList)
 
