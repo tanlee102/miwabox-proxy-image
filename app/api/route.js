@@ -10,7 +10,7 @@ export async function OPTIONS(request, context) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS", // If you're making POST requests
+        "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
     }
     return new NextResponse({ status: 200, headers });
 }
@@ -21,7 +21,7 @@ export async function PUT(request, context) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
     }    
 
     try {
