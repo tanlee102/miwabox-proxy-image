@@ -9,9 +9,9 @@ export async function GET(request, context) {
         const headers = {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "GET",
-        }
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
+        }        
 
         const blob = String(request.nextUrl.searchParams.get("blob"));
 

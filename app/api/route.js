@@ -10,10 +10,9 @@ export async function POST(request, context) {
     const headers = {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST",
-        'Access-Control-Allow-Credentials': 'true'
-    }
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
+    }    
 
     try {
         const oauth2Client = new google.auth.OAuth2(
