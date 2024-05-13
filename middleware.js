@@ -12,6 +12,8 @@ export async function middleware(request) {
     const headersList = headers()
     const myAuthorization = headersList.get('MyToken');
 
+    console.log(headersList)
+
     if(myAuthorization){
         const token = headersList.get('authorization').replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
