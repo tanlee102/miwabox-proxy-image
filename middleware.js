@@ -9,9 +9,6 @@ const listEmailApproved = [
 
 export async function middleware(request) {
 
-    const headersList = headers()
-    const token = headersList.get('mytoken');
-
     if(request.method === 'OPTIONS'){
         const headers = {
             "Content-Type": "*/*",
@@ -21,6 +18,10 @@ export async function middleware(request) {
         }
         return new NextResponse({ status: 200, headers });
     }else{
+
+        const headersList = headers()
+        const token = headersList.get('mytoken');
+        
         console.log(request.method, token)
 
         // const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
