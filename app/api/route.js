@@ -2,6 +2,7 @@ import { google } from 'googleapis';
 import { NextResponse } from 'next/server'
 import { Readable } from 'stream';
 import { getStore } from "@netlify/blobs";
+import { headers } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
