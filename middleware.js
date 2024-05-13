@@ -27,14 +27,15 @@ export async function middleware(request) {
         } catch(err) {
             console.log(err);
             return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "*",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type, Authorization",
-                "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
             }});
         }
     }else if(request.method === 'OPTIONS'){
         const headers = {
+            "Content-Type": "*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -42,7 +43,7 @@ export async function middleware(request) {
         return new NextResponse({ status: 200, headers });
     }else{
         return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
