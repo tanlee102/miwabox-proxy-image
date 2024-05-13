@@ -26,6 +26,7 @@ export async function middleware(request) {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Methods": "GET, POST",
+            'Access-Control-Allow-Credentials': 'true'
         }});
     }
 
