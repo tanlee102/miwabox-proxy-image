@@ -14,6 +14,14 @@ export async function middleware(request) {
 
     console.log(request.method, token)
     // console.log(headersList)
+
+
+
+    const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
+    const data = await jose.jwtVerify(token, secret);
+
+    console.log(data)
+
     console.log('-------')
 
     // if(!token){
