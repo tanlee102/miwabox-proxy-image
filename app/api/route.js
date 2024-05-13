@@ -2,12 +2,13 @@ import { google } from 'googleapis';
 import { NextResponse } from 'next/server'
 import { Readable } from 'stream';
 import { getStore } from "@netlify/blobs";
+import { headers } from 'next/headers'
 
 export const dynamic = 'force-dynamic';
 
 export async function OPTIONS(request, context) {
     const headers = {
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS", // If you're making POST requests
@@ -17,8 +18,12 @@ export async function OPTIONS(request, context) {
 
 export async function POST(request, context) {
 
-    const headers = {
-        "Content-Type": "*",
+    const headersList = headers()
+    const myAuthorization = headersList.get('authorization');
+    console.log(headersList, myAuthorization)
+
+    const my_headers = {
+        "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -78,10 +83,10 @@ export async function POST(request, context) {
             }
         }
 
-        return NextResponse.json(response.data, { status: 200, headers });
+        return NextResponse.json(response.data, { status: 200, my_headers });
 
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 400, headers });
+        return NextResponse.json({ error: error.message }, { status: 400, my_headers });
     }
 
 }
