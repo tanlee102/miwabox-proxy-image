@@ -10,6 +10,7 @@ const listEmailApproved = [
 export async function middleware(request) {
 
     const headersList = headers()
+    console.log(headersList)
     const token = headersList.get('Authorization').replace('Bearer ', '');
     const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
