@@ -9,15 +9,15 @@ const listEmailApproved = [
 
 export async function middleware(request) {
 
-    // if(request.method === 'OPTIONS'){
-    //     const headers = {
-    //         "Content-Type": "*/*",
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    //         "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
-    //     }
-    //     return new NextResponse({ status: 200, headers });
-    // }
+    if(request.method === 'OPTIONS'){
+        const headers = {
+            "Content-Type": "*/*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
+        }
+        return new NextResponse({ status: 200, headers });
+    }
     // if(!token){
 
     //     const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
