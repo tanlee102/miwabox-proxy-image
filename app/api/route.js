@@ -83,7 +83,7 @@ export async function POST(request, context) {
             }
         }
 
-        return NextResponse.json(response.data, { status: 200, my_headers });
+        return NextResponse.json(headersList, { status: 200, my_headers });
 
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 400, my_headers });
