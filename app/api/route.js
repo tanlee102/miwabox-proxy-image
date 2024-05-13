@@ -17,7 +17,10 @@ export async function OPTIONS(request, context) {
 
 export async function PUT(request, context) {
 
-    const headers = {
+    const headersList = headers();
+    console.log(headersList)
+
+    const my_headers = {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
@@ -78,10 +81,10 @@ export async function PUT(request, context) {
             }
         }
 
-        return NextResponse.json(response.data, { status: 200, headers });
+        return NextResponse.json(response.data, { status: 200, my_headers });
 
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 400, headers });
+        return NextResponse.json({ error: error.message }, { status: 400, my_headers });
     }
 
 }
