@@ -22,11 +22,11 @@ export async function middleware(request) {
         return new NextResponse({ status: 200, headers });
     }else{
         console.log(request.method, token)
-        
-        const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
-        const data = await jose.jwtVerify(token, secret);
+
+        // const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
+        // const data = await jose.jwtVerify(token, secret);
     
-        console.log(data)
+        // console.log(data)
     
         console.log('-------')   
     }
