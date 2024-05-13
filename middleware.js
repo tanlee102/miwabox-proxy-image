@@ -13,13 +13,6 @@ export async function middleware(request) {
     const token = headersList.get('authorization').replace('Bearer ', '');
     const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
-    const headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "GET, POST",
-    }
-
     try {
         const { payload: { email } } = await jose.jwtVerify(token, secret);
         if (!listEmailApproved.includes(email)) {
@@ -27,7 +20,12 @@ export async function middleware(request) {
         }
     } catch(err) {
         console.log(err);
-        return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers });
+        return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST",
+        }});
     }
 
 }
