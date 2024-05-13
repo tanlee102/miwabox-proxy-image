@@ -42,6 +42,7 @@ export async function middleware(request) {
         return new NextResponse({ status: 200, headers });
     }else{
         return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
+            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
