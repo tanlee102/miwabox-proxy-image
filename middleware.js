@@ -11,23 +11,23 @@ export async function middleware(request) {
 
     const headersList = headers()
     console.log(headersList)
-    const token = headersList.get('Authorization').replace('Bearer ', '');
-    const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
+    // const token = headersList.get('Authorization').replace('Bearer ', '');
+    // const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
-    try {
-        const { payload: { email } } = await jose.jwtVerify(token, secret);
-        if (!listEmailApproved.includes(email)) {
-            throw new Error();
-        }
-    } catch(err) {
-        console.log(err);
-        return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
-        }});
-    }
+    // try {
+    //     const { payload: { email } } = await jose.jwtVerify(token, secret);
+    //     if (!listEmailApproved.includes(email)) {
+    //         throw new Error();
+    //     }
+    // } catch(err) {
+    //     console.log(err);
+    //     return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
+    //         "Content-Type": "application/json",
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    //         "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
+    //     }});
+    // }
 
 }
 
