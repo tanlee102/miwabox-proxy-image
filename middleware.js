@@ -17,21 +17,7 @@ export async function middleware(request) {
             "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
         }
         return new NextResponse({ status: 200, headers });
-    }else{
-
-        // const headersList = headers()
-        // const token = headersList.get('mytoken');
-
-        // console.log(request.method, token)
-
-        // // const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
-        // // const data = await jose.jwtVerify(token, secret);
-    
-        // // console.log(data)
-    
-        // console.log('-------')   
     }
-
     // if(!token){
 
     //     const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
