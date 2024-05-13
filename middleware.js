@@ -13,7 +13,8 @@ export async function middleware(request) {
     const myAuthorization = headersList.get('mytoken');
 
     console.log(headersList)
-    console.log(request.method)
+    console.log(request.method, myAuthorization)
+    console.log('-------')
 
     // if(myAuthorization){
 
