@@ -13,6 +13,7 @@ export async function middleware(request) {
     const myAuthorization = headersList.get('authorization');
     
     console.log(headersList)
+    console.log(request.method)
 
     if(myAuthorization){
         const token = headersList.get('authorization').replace('Bearer ', '');
