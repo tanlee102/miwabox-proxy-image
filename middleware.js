@@ -27,7 +27,7 @@ export async function middleware(request) {
         } catch(err) {
             console.log(err);
             return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
-                "Content-Type": "application/json, text/plain, */*",
+                "Content-Type": "*/*",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type, Authorization",
                 "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
@@ -35,7 +35,7 @@ export async function middleware(request) {
         }
     }else if(request.method === 'OPTIONS'){
         const headers = {
-            "Content-Type": "application/json, text/plain, */*",
+            "Content-Type": "*/*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
