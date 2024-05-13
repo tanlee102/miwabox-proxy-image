@@ -7,27 +7,14 @@ import { headers } from 'next/headers';
 export const dynamic = 'force-dynamic';
 
 export async function OPTIONS(request, context) {
-    const headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
-    }
-    return new NextResponse({ status: 200, headers });
+    return new NextResponse({ status: 200 });
 }
 
 export async function PUT(request, context) {
 
     const headersList = headers();
     console.log(headersList)
-    const token = headersList.get("mytoken");
-
-    const my_headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
-    }    
+    const token = headersList.get("Authorization");  
 
     try {
         // const oauth2Client = new google.auth.OAuth2(
