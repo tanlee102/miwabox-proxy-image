@@ -18,7 +18,7 @@ export async function OPTIONS(request, context) {
 export async function POST(request, context) {
 
     const headers = {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
