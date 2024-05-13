@@ -15,7 +15,7 @@ export async function middleware(request) {
     console.log(headersList)
 
     if(myAuthorization){
-        
+
         const token = headersList.get('mytoken').replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
     
@@ -35,7 +35,7 @@ export async function middleware(request) {
         // }
     }else if(request.method === 'OPTIONS'){
         const headers = {
-            "Content-Type": "*",
+            "Content-Type": "application/json, text/plain, */*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
@@ -43,7 +43,7 @@ export async function middleware(request) {
         return new NextResponse({ status: 200, headers });
     }else{
         return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
-            "Content-Type": "*",
+            "Content-Type": "application/json, text/plain, */*",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
