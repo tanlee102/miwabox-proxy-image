@@ -15,9 +15,6 @@ export async function GET(request, context) {
 
     try {
 
-        const password = String(request.nextUrl.searchParams.get("password"));   
-        if(password !== process.env.PASSWORD) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
-
         const id = String(request.nextUrl.searchParams.get("id"));
         
         const oauth2Client = new google.auth.OAuth2(

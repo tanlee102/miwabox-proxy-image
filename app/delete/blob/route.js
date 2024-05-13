@@ -13,9 +13,6 @@ export async function GET(request, context) {
             "Access-Control-Allow-Methods": "GET",
         }
 
-        const password = String(request.nextUrl.searchParams.get("password"));
-        if(password !== process.env.PASSWORD) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers });
-
         const blob = String(request.nextUrl.searchParams.get("blob"));
 
         try {

@@ -31,60 +31,55 @@ export async function POST(request, context) {
         
         const formData = await request.formData();
         const image = formData.get("image") instanceof File ? formData.get("image") : null;
-        const password = formData.get("password");
 
-        if(String(process.env.PASSWORD) === String(password)){
-            const imageBuffer = await new Response(image).arrayBuffer();
+        const imageBuffer = await new Response(image).arrayBuffer();
+
+        const imageStream = new Readable();
+        imageStream.push(Buffer.from(imageBuffer));
+        imageStream.push(null);
     
-            const imageStream = new Readable();
-            imageStream.push(Buffer.from(imageBuffer));
-            imageStream.push(null);
-        
-            const response = await drive.files.create({
-                requestBody: {
-                  name: image.name,
-                },
-                media: {
-                  mimeType: image.type,
-                  body: imageStream,
-                },
-            });
+        const response = await drive.files.create({
+            requestBody: {
+                name: image.name,
+            },
+            media: {
+                mimeType: image.type,
+                body: imageStream,
+            },
+        });
 
-            let result = {}
+        let result = {}
 
-            if(response?.status == 200){
-                if(response?.data){
-                    const fileId = response.data.id;
+        if(response?.status == 200){
+            if(response?.data){
+                const fileId = response.data.id;
 
-                    const keys = getStore({
-                        name: 'keys-store',
-                        siteID: process.env.siteID,
-                        token: process.env.token,
-                    });
-                    await keys.set(fileId, 'true');
+                const keys = getStore({
+                    name: 'keys-store',
+                    siteID: process.env.siteID,
+                    token: process.env.token,
+                });
+                await keys.set(fileId, 'true');
 
-                    await drive.permissions.create({
-                        fileId: fileId,
-                        requestBody: {
-                            role: 'reader',
-                            type: 'anyone'
-                        }
-                    });
+                await drive.permissions.create({
+                    fileId: fileId,
+                    requestBody: {
+                        role: 'reader',
+                        type: 'anyone'
+                    }
+                });
 
-                    const key = process.env.MY_SECRET_KEY
-                    const salt = process.env.MY_SALT
-                    const derivedKey = await getDerivedKey(key, salt);
-                    const ciphertextAndIv = await encrypt(derivedKey, fileId);
+                const key = process.env.MY_SECRET_KEY
+                const salt = process.env.MY_SALT
+                const derivedKey = await getDerivedKey(key, salt);
+                const ciphertextAndIv = await encrypt(derivedKey, fileId);
 
-                    result = response.data;
-                    result['codeURL'] = encodeURIComponent(ciphertextAndIv);
-                }
+                result = response.data;
+                result['codeURL'] = encodeURIComponent(ciphertextAndIv);
             }
-
-            return NextResponse.json(result, { status: 200, headers });
-        }else{
-            return NextResponse.json({ error: 'Unauthorized.' }, { status: 401, headers });
         }
+
+        return NextResponse.json(result, { status: 200, headers });
 
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 400, headers });
