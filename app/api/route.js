@@ -15,7 +15,7 @@ export async function OPTIONS(request, context) {
     return new NextResponse({ status: 200, headers });
 }
 
-export async function POST(request, context) {
+export async function PUT(request, context) {
 
     const headers = {
         "Content-Type": "application/json",
