@@ -9,11 +9,11 @@ const listEmailApproved = [
 
 export async function middleware(request) {
 
-    // const headersList = headers()
-    // const myAuthorization = headersList.get('authorization');
+    const headersList = headers()
+    const myAuthorization = headersList.get('authorization');
     
-    // console.log(headersList)
-    // console.log(request.method)
+    console.log(headersList, myAuthorization)
+    console.log(request.method)
 
     // if(myAuthorization){
     //     const token = headersList.get('authorization').replace('Bearer ', '');
