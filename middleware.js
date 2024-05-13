@@ -30,7 +30,7 @@ export async function middleware(request) {
                 "Content-Type": "application/json, text/plain, */*",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type, Authorization",
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
             }});
         }
     }else if(request.method === 'OPTIONS'){
