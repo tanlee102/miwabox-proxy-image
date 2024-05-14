@@ -9,16 +9,14 @@ const listEmailApproved = [
 
 export async function middleware(request) {
 
-    if(request.method === 'PUT'){
+    if(request.method === 'PUT' || request.method === 'POST' || request.method === 'DELETE'){
+
         const headersList = headers()
         const token = headersList.get('authorization').replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
         try {
             const { payload } = await jose.jwtVerify(token, secret);
-
-            console.log(payload)
-
             if (!listEmailApproved.includes(payload.email)) {
                 throw new Error();
             }
