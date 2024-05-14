@@ -21,11 +21,11 @@ export async function middleware(request) {
         return NextResponse.json({}, { headers: corsOptions })
     }
 
-    const response = NextResponse.next()
+    const response = NextResponse.next();
 
     if(request.method === 'PUT' || request.method === 'POST' || request.method === 'DELETE'){
 
-        response.headers.set("Content-Type", "application/json")
+        response.headers.set("Content-Type", "application/json");
 
         const headersList = headers();
         const token = headersList.get('authorization').replace('Bearer ', '');
