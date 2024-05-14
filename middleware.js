@@ -9,11 +9,8 @@ const listEmailApproved = [
 
 export async function middleware(request) {
 
-    const reqMethod = String(request.method);
-
-    if(reqMethod === 'POST' || reqMethod === 'PUT' || reqMethod === 'DELETE'){
-        
-        const headersList = headers();
+    if(request.method === 'PUT'){
+        const headersList = headers()
         const token = headersList.get('authorization').replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
@@ -30,11 +27,10 @@ export async function middleware(request) {
             return NextResponse.json({ error: "Failed to authenticate." }, { status: 400 });
         }
 
-    }else if(reqMethod === 'OPTIONS'){
-        return new NextResponse({ status: 200 });
     }
 
-    return NextResponse.next();
+    return NextResponse.next()
+
 }
  
 export const config = {
