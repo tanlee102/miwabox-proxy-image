@@ -2,16 +2,13 @@ import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 import { google } from 'googleapis';
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-export async function GET(request, context) {
+export async function OPTIONS() {
+    return new NextResponse({ status: 200 });
+}
 
-    const headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "GET, POST", // If you're making POST requests
-    }    
+export async function DELETE(request, context) {
 
     try {
 
@@ -48,15 +45,15 @@ export async function GET(request, context) {
             await store.delete(id); 
             await keys.delete(id); 
 
-            return NextResponse.json({ message: 'success' }, { status: 200, headers });
+            return NextResponse.json({ message: 'success' }, { status: 200 });
 
         } catch (error) {
-            return NextResponse.json({ error: error }, { status: 500, headers });
+            return NextResponse.json({ error: error }, { status: 500 });
         }
 
     } catch (error) {
         console.log(error)
-        return NextResponse.json({ error: error }, { status: 500, headers });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
 
 }

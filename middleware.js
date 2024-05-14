@@ -11,7 +11,7 @@ export async function middleware(request) {
 
     if(request.method === 'PUT' || request.method === 'POST' || request.method === 'DELETE'){
 
-        const headersList = headers()
+        const headersList = headers();
         const token = headersList.get('authorization').replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
@@ -27,8 +27,7 @@ export async function middleware(request) {
 
     }
 
-    return NextResponse.next()
-
+    return NextResponse.next();
 }
  
 export const config = {
