@@ -5,10 +5,6 @@ import { getStore } from "@netlify/blobs";
 
 export const dynamic = 'force-dynamic';
 
-export async function OPTIONS() {
-    return new NextResponse({ status: 200 });
-}
-
 export async function PUT(request, context) {
 
     try {
