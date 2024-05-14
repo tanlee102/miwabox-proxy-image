@@ -42,7 +42,10 @@ export async function middleware(request) {
         }
 
     }
-
+    
+    Object.entries(corsOptions).forEach(([key, value]) => {
+        response.headers.set(key, value)
+    })
     return response;
 }
 
