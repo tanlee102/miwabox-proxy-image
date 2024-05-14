@@ -47,6 +47,7 @@ export async function middleware(request) {
         response.headers.set(key, value)
     })
     return response;
+    
 }
 
 export const config = {
