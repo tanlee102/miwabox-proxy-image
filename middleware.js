@@ -29,6 +29,10 @@ export async function middleware(request) {
 
     }
 
+    if(request.method === 'OPTIONS'){
+        return new NextResponse({ status: 200 });
+    }
+
     return NextResponse.next()
 
 }

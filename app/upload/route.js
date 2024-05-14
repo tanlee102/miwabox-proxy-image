@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
+
 export async function PUT(request, context) {
 
     const headersList = headers();
