@@ -28,7 +28,7 @@ export async function middleware(request) {
         response.headers.set("Content-Type", "application/json");
 
         const headersList = headers();
-        const token = headersList.get('authorization').replace('Bearer ', '');
+        const token = String(headersList.get('authorization')).replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
         try {
