@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 import { google } from 'googleapis';
 
-export const dynamic = 'force-dynamic';
-
 export async function OPTIONS() {
     return new NextResponse({ status: 200 });
 }

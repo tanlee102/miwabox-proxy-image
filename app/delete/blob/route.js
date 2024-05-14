@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getStore } from "@netlify/blobs";
 
-export const dynamic = 'force-dynamic';
-
 export async function OPTIONS() {
     return new NextResponse({ status: 200 });
 }
@@ -27,7 +25,7 @@ export async function DELETE(request, context) {
             }
             
             return NextResponse.json({ message: 'success' }, { status: 200 });
-            
+
         } catch (error) {
             return NextResponse.json({ error: error }, { status: 400 });
         }
