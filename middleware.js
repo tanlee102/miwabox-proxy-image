@@ -14,19 +14,17 @@ export async function middleware(request) {
         const token = headersList.get('authorization').replace('Bearer ', '');
         const secret = new TextEncoder().encode(process.env.MY_AUTH_KEY);
 
-        if (!pathName.startsWith(matchString)) {
-            try {
-                const { payload } = await jose.jwtVerify(token, secret);
+        try {
+            const { payload } = await jose.jwtVerify(token, secret);
 
-                console.log(payload)
+            console.log(payload)
 
-                if (!listEmailApproved.includes(payload.email)) {
-                    throw new Error();
-                }
-            } catch(err) {
-                console.log(err);
-                return NextResponse.json({ error: "Failed to authenticate." }, { status: 400 });
+            if (!listEmailApproved.includes(payload.email)) {
+                throw new Error();
             }
+        } catch(err) {
+            console.log(err);
+            return NextResponse.json({ error: "Failed to authenticate." }, { status: 400 });
         }
 
     }
