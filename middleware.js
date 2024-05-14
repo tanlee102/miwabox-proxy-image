@@ -31,7 +31,7 @@ export async function middleware(request) {
         return new NextResponse({ status: 200, headers: {
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, Accept-Version, Content-Length",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         }});
     }
