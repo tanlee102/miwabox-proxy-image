@@ -34,7 +34,7 @@ export async function middleware(request) {
 
     return NextResponse.next();
 }
- 
+
 export const config = {
     matcher: ['/upload/:path*', '/delete/:path*'],
 }

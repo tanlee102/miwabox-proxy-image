@@ -4,16 +4,11 @@ import { Readable } from 'stream';
 import { getStore } from "@netlify/blobs";
 import { encrypt, getDerivedKey } from '../lib';
 
-export const dynamic = 'force-dynamic';
+export async function OPTIONS() {
+    return new NextResponse({ status: 200 });
+}
 
-export async function POST(request, context) {
-
-    const headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS", // If you're making POST requests
-    }
+export async function PUT(request, context) {
     
     try {
         const oauth2Client = new google.auth.OAuth2(
