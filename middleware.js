@@ -7,9 +7,25 @@ const listEmailApproved = [
     'caculus103@gmail.com'
 ]
 
+const corsOptions = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, Accept-Version, Content-Length",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Credentials": "true",
+}
+
 export async function middleware(request) {
 
+    const isPreflight = request.method === 'OPTIONS';
+    if (isPreflight) {
+        return NextResponse.json({}, { headers: corsOptions })
+    }
+
+    const response = NextResponse.next()
+
     if(request.method === 'PUT' || request.method === 'POST' || request.method === 'DELETE'){
+
+        response.headers.set("Content-Type", "application/json")
 
         const headersList = headers();
         const token = headersList.get('authorization').replace('Bearer ', '');
@@ -22,17 +38,12 @@ export async function middleware(request) {
             }
         } catch(err) {
             console.log(err);
-            return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, Accept-Version, Content-Length",
-                "Access-Control-Allow-Methods": "PUT, POST, DELETE",
-            }});
+            return NextResponse.json({ error: "Failed to authenticate." }, { status: 400, headers: corsOptions});
         }
 
     }
 
-    return NextResponse.next();
+    return response;
 }
 
 export const config = {
