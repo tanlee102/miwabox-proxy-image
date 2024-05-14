@@ -6,9 +6,9 @@ import { headers } from 'next/headers';
 
 export const dynamic = 'force-dynamic';
 
-export async function OPTIONS(request, context) {
-    return new NextResponse({ status: 200 });
-}
+// export async function OPTIONS(request, context) {
+//     return new NextResponse({ status: 200 });
+// }
 
 export async function PUT(request, context) {
 
