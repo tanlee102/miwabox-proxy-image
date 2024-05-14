@@ -70,10 +70,10 @@ export async function PUT(request, context) {
             }
         }
 
-        return NextResponse.json(result, { status: 200, headers });
+        return NextResponse.json(result, { status: 200 });
 
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 400, headers });
+        return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
 }
