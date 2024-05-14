@@ -3,7 +3,6 @@ import { getStore } from "@netlify/blobs";
 
 export const dynamic = 'force-dynamic'
 
-//This is router image
 export async function GET(request, context) {
 
   try {
@@ -38,7 +37,6 @@ export async function GET(request, context) {
         }
       }
 
-
       if(approve){
         
         const headers = {
@@ -65,6 +63,7 @@ export async function GET(request, context) {
             return NextResponse.json({ error: 'Not Found.' }, { status: 404 });
           }
         }
+        
       }else{
         return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
       }
@@ -73,6 +72,3 @@ export async function GET(request, context) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 }
-
-
-// const url = 'https://www.googleapis.com/drive/v3/files/'+id+'?key=AIzaSyCDEQ915m_RAEWxhOghge1sWUBO6cnROVI&alt=media'

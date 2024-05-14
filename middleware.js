@@ -4,7 +4,7 @@ import * as jose from 'jose'
 
 const listEmailApproved = [
     'xemtua@gmail.com',
-    'hoifancuongonepiece@gmail.com'
+    'caculus103@gmail.com'
 ]
 
 export async function middleware(request) {
