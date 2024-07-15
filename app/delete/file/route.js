@@ -5,7 +5,6 @@ import { google } from 'googleapis';
 export async function DELETE(request, context) {
 
     try {
-
         const id = String(request.nextUrl.searchParams.get("id"));
         
         const oauth2Client = new google.auth.OAuth2(
