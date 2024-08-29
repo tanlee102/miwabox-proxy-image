@@ -4,7 +4,6 @@ import * as jose from 'jose'
 
 const listEmailApproved = [
     'xemtua@gmail.com',
-    'caculus103@gmail.com'
 ]
 
 const corsOptions = {
